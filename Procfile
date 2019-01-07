@@ -1,1 +1,1 @@
-web: python pohlwg_bot.py
+work: python pohlwg_bot.py
