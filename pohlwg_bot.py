@@ -3,8 +3,32 @@ import requests
 import time
 import urllib #solves problems with symbols having special meanings in URL context (?&+)
 
+import os
+import psycopg2
+
+
+
+
+
 TOKEN = "435982196:AAGg10t81vJUUygSTVJQ-xYR94bcQEOqv0E"
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
+
+#does the database work?
+def try_database():
+    try:
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        # create a psycopg2 cursor that can execute queries
+        cursor = conn.cursor()
+        # create a new table with a single column called "name"
+        cursor.execute("""CREATE TABLE tutorials (name char(40));""")
+        # run a SELECT statement - no data in there, but we can try it
+        cursor.execute("""SELECT * from tutorials""")
+        rows = cursor.fetchall()
+        print(rows)
+    except Exception as e:
+        print("Uh oh, can't connect. Invalid dbname, user or password?")
+        print(e)
 
 #dowloads contents of URL and returns string
 def get_url(url):   
@@ -55,6 +79,7 @@ def echo_all(updates):
             print(e)
     
 def main():
+    try_database()
     last_update_id = None
     while True:
         print ("update")
