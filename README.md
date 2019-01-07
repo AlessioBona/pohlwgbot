@@ -1,2 +1,0 @@
-# pohlwgbot
-the real bot

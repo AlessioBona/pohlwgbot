@@ -65,5 +65,6 @@ def main():
         time.sleep(0.5)
 
 if __name__ == '__main__':
+    run(host='localhost', port= process.env.PORT || 8080, debug=True)
     main()
 
