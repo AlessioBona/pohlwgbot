@@ -164,7 +164,7 @@ def error(bot, update, error):
 
 def repeat(bot, update, args):
     userMessage = " ".join(args)
-    update.message.reply_text("you said: " + user_says)
+    update.message.reply_text("you said: " + userMessage)
 
 def main():
     # Create the Updater and pass it your bot's token.
