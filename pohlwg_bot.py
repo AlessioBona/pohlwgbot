@@ -3,8 +3,6 @@ import requests
 import time
 import urllib #solves problems with symbols having special meanings in URL context (?&+)
 
-import telegram
-
 import os
 import psycopg2
 
