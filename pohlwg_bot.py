@@ -68,7 +68,7 @@ def get_last_chat_id_and_text(updates):
     return (text, chat_id)
 
 
-def send_message(text, chat_id):
+def send_message(text, chat_id, replay_markup):
      text = urllib.parse.quote_plus(text) #no more problems with ?&+etc
      url = URL + "sendMessage?text={}&chat_id={}&reply_markup={}".format(text, chat_id, replay_markup)
      get_url(url)
