@@ -119,7 +119,7 @@ def try_database(bot, update):
         #read the connection parameters
         params = config()
         #connect
-        conn = psycopg2.connect(**params) #(DATABASE_URL, sslmode='require')
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require') #(DATABASE_URL, sslmode='require')
         # create a psycopg2 cursor that can execute queries
         cursor = conn.cursor()
         # create a new table with a single column called "name"
