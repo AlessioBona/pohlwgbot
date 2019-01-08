@@ -3,6 +3,8 @@ import requests
 import time
 import urllib #solves problems with symbols having special meanings in URL context (?&+)
 
+import telegram
+
 import os
 import psycopg2
 
@@ -66,7 +68,7 @@ def get_last_chat_id_and_text(updates):
 
 def send_message(text, chat_id):
      text = urllib.parse.quote_plus(text) #no more problems with ?&+etc
-     url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
+     url = URL + "sendMessage?text={}&chat_id={}&reply_markup={}".format(text, chat_id, replay_markup)
      get_url(url)
 
 def echo_all(updates):
@@ -74,7 +76,12 @@ def echo_all(updates):
         try:
             text = update["message"]["text"]
             chat = update["message"]["chat"]["id"]
-            send_message(text, chat)
+            replay_markup = ReplyKeyboardMarkup(
+                                keyboard=[
+                                    [KeyboardButton(text="Yes"), KeyboardButton(text="No")]
+                                ]
+                            )
+            send_message(text, chat, replay_markup)
         except Exception as e:
             print(e)
     
