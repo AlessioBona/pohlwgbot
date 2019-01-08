@@ -113,7 +113,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 #does the database work?
-def try_database():
+def try_database(bot, update):
     try:
         # create a psycopg2 cursor that can execute queries
         cursor = conn.cursor()
