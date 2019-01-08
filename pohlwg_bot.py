@@ -93,7 +93,7 @@
 # This program is dedicated to the public domain under the CC0 license.
 """
 import logging
-from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, KeyboardMarkup
+from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 #for the database
@@ -172,7 +172,7 @@ def makeButtons(bot, update, args):
 
                 [KeyboardButton(args[2], callback_data='3')]]
 
-    reply_markup = KeyboardMarkup(keyboard)
+    reply_markup = ReplyKeyboardMarkup(keyboard)
 
     update.message.reply_text('Scegli un bottone:', reply_markup=reply_markup)
     
