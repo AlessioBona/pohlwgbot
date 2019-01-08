@@ -3,36 +3,18 @@
 ##import time
 ##import urllib #solves problems with symbols having special meanings in URL context (?&+)
 ##
-##import os
-##import psycopg2
+
 ##
 ##import telegram
 ##
 ##from telegram import ReplyKeyboardMarkup, KeyboardButton
 ##
 ##
-##
-##
-##
 ##TOKEN = "435982196:AAGg10t81vJUUygSTVJQ-xYR94bcQEOqv0E"
 ##URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 ##
-###does the database work?
-##def try_database():
-##    try:
-##        DATABASE_URL = os.environ['DATABASE_URL']
-##        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-##        # create a psycopg2 cursor that can execute queries
-##        cursor = conn.cursor()
-##        # create a new table with a single column called "name"
-##        cursor.execute("""CREATE TABLE tutorials (name char(40));""")
-##        # run a SELECT statement - no data in there, but we can try it
-##        cursor.execute("""SELECT * from tutorials""")
-##        rows = cursor.fetchall()
-##        print(rows)
-##    except Exception as e:
-##        print("Uh oh, can't connect. Invalid dbname, user or password?")
-##        print(e)
+##
+
 ##
 ###dowloads contents of URL and returns string
 ##def get_url(url):   
@@ -99,6 +81,14 @@
 
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+
+
+
+
+
+
+
 """Basic example for a bot that uses inline keyboards.
 # This program is dedicated to the public domain under the CC0 license.
 """
@@ -106,11 +96,42 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
+#for the database
+import os
+import psycopg2
+
+
+
 TOKEN = "435982196:AAGg10t81vJUUygSTVJQ-xYR94bcQEOqv0E"
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# for the database
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+#does the database work?
+def try_database():
+    try:
+        # create a psycopg2 cursor that can execute queries
+        cursor = conn.cursor()
+        # create a new table with a single column called "name"
+        cursor.execute("""CREATE TABLE prova (id INTEGER, name VARCHAR(255));""")
+        # run a SELECT statement - no data in there, but we can try it
+        cursor.execute("""SELECT * from prova""")
+        rows = cursor.fetchall()
+        conn.commit()
+        cur.close()
+        #to save: conn.commit()    to close: cur.close()   and   conn.close()
+        print(rows)
+    except Exception as e:
+        print("Uh oh, can't connect. Invalid dbname, user or password?")
+        print(e)
+
+#PSQL language
+#
 
 
 def start(bot, update):
@@ -148,6 +169,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     updater.dispatcher.add_handler(CommandHandler('help', help))
+    updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
     # Start the Bot
