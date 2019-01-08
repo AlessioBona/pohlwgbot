@@ -185,7 +185,7 @@ def main():
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
-    updater.dispatcher.add_handler(CommandHandler('makeButtons', repeat, pass_args=True))
+    updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
