@@ -6,6 +6,10 @@ import urllib #solves problems with symbols having special meanings in URL conte
 import os
 import psycopg2
 
+import telegram
+
+from telegram import ReplyKeyboardMarkup
+
 
 
 
