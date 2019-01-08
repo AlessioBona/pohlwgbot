@@ -99,6 +99,7 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 #for the database
 import os
 import psycopg2
+from config import config
 
 
 
@@ -108,13 +109,17 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# for the database
+# for the database (still necessary?)
 DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
 
 #does the database work?
 def try_database(bot, update):
     try:
+        #read the connection parameters
+        params = config()
+        #connect
+        conn = psycopg2.connect(**params) #(DATABASE_URL, sslmode='require')
         # create a psycopg2 cursor that can execute queries
         cursor = conn.cursor()
         # create a new table with a single column called "name"
