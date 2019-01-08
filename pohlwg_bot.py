@@ -162,6 +162,9 @@ def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
 
+def repeat(bot, update, args):
+    userMessage = " ".join(args)
+    update.message.reply_text("you said: " + user_says)
 
 def main():
     # Create the Updater and pass it your bot's token.
@@ -170,6 +173,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     updater.dispatcher.add_handler(CommandHandler('help', help))
+    updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
