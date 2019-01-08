@@ -8,7 +8,7 @@ import psycopg2
 
 import telegram
 
-from telegram import ReplyKeyboardMarkup
+from telegram import ReplyKeyboardMarkup, KeyboardButton
 
 
 
