@@ -93,7 +93,7 @@
 # This program is dedicated to the public domain under the CC0 license.
 """
 import logging
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, KeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 #for the database
@@ -166,6 +166,17 @@ def repeat(bot, update, args):
     userMessage = " ".join(args)
     update.message.reply_text("you said: " + userMessage)
 
+def makeButtons(bot, update, args):
+    keyboard = [[KeyboardButton(args[0], callback_data=args[0]),
+                 KeyboardButton(args[1], callback_data='2')],
+
+                [KeyboardButton(args[2], callback_data='3')]]
+
+    reply_markup = KeyboardMarkup(keyboard)
+
+    update.message.reply_text('Scegli un bottone:', reply_markup=reply_markup)
+    
+
 def main():
     # Create the Updater and pass it your bot's token.
     updater = Updater(TOKEN)
@@ -174,6 +185,7 @@ def main():
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
+    updater.dispatcher.add_handler(CommandHandler('makeButtons', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
