@@ -180,10 +180,9 @@ def makeButtons(bot, update, args):
 
 def button2(bot, update):
     query = update.callback_query
-    update.message.reply_text("Selected - option: " + query.data)
-    # bot.edit_message_text(text="Selected - option: {}".format(query.data),
-    #                       chat_id=query.message.chat_id,
-    #                       message_id=query.message.message_id)
+    bot.send_message(text="Selected - option: {}".format(query.data),
+                          chat_id=query.message.chat_id,
+                          message_id=query.message.message_id)
     
 
 def main():
