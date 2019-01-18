@@ -162,9 +162,11 @@ def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
 
+
 def repeat(bot, update, args):
     userMessage = " ".join(args)
     update.message.reply_text("you said: " + userMessage)
+
 
 def makeButtons(bot, update, args):
     keyboard = [[KeyboardButton(args[0], callback_data=args[0]),
@@ -174,14 +176,15 @@ def makeButtons(bot, update, args):
 
     reply_markup = ReplyKeyboardMarkup(keyboard)
 
-    update.message.reply_text('Scegli un bottone:', reply_markup=reply_markup)
+    update.message.reply_text('Scegli un bottone diff:', reply_markup=reply_markup)
+
 
 def button2(bot, update):
     query = update.callback_query
 
     update.message.reply_text(text="Selected option: {}".format(query.data),
-                          chat_id=query.message.chat_id,
-                         message_id=query.message.message_id)
+                              chat_id=query.message.chat_id,
+                              message_id=query.message.message_id)
     
 
 def main():
@@ -193,7 +196,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
-    # updater.dispatcher.add_handler(CallbackQueryHandler(button2))
+    updater.dispatcher.add_handler(CallbackQueryHandler(button2))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
