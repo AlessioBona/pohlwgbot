@@ -169,9 +169,8 @@ def repeat(bot, update, args):
 
 
 def makeButtons(bot, update, args):
-    keyboard = [[InlineKeyboardButton(args[0], callback_data=args[0]),
-                 InlineKeyboardButton(args[1], callback_data='2')],
-
+    keyboard = [[InlineKeyboardButton(args[0], callback_data='1'),
+                InlineKeyboardButton(args[1], callback_data='2')],
                 [InlineKeyboardButton(args[2], callback_data='3')]]
 
     reply_markup = InlineKeyboardButton(keyboard)
