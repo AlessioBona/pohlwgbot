@@ -124,7 +124,7 @@ def try_database(bot, update):
         cursor.execute("""SELECT * from prova""")
         rows = cursor.fetchall()
         conn.commit()
-        cur.close()
+        cursor.close()
         #to save: conn.commit()    to close: cur.close()   and   conn.close()
         print(rows)
     except Exception as e:
