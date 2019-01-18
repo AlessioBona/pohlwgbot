@@ -179,9 +179,9 @@ def makeButtons(bot, update, args):
 def button2(bot, update):
     query = update.callback_query
 
-    bot.edit_message_text(text="Selected option: {}".format(query.data),
+    update.message.reply_text(text="Selected option: {}".format(query.data),
                           chat_id=query.message.chat_id,
-                          message_id=query.message.message_id)
+                         message_id=query.message.message_id)
     
 
 def main():
@@ -193,7 +193,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button2))
+    # updater.dispatcher.add_handler(CallbackQueryHandler(button2))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_error_handler(error)
 
