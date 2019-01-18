@@ -169,22 +169,22 @@ def repeat(bot, update, args):
 
 
 def makeButtons(bot, update, args):
-    keyboard = [[KeyboardButton(args[0], callback_data=args[0]),
-                 KeyboardButton(args[1], callback_data='2')],
+    keyboard = [[InlineKeyboardButton(args[0], callback_data=args[0]),
+                 InlineKeyboardButton(args[1], callback_data='2')],
 
-                [KeyboardButton(args[2], callback_data='3')]]
+                [InlineKeyboardButton(args[2], callback_data='3')]]
 
-    reply_markup = ReplyKeyboardMarkup(keyboard)
+    reply_markup = InlineKeyboardButton(keyboard)
 
-    update.message.reply_text('Scegli un bottone diff:', reply_markup=reply_markup)
+    update.message.reply_text('Choose a button:', reply_markup=reply_markup)
 
 
 def button2(bot, update):
     query = update.callback_query
 
-    update.message.reply_text(text="Selected option: {}".format(query.data),
-                              chat_id=query.message.chat_id,
-                              message_id=query.message.message_id)
+    bot.edit_message_text(text="Selected option: {}".format(query.data),
+                          chat_id=query.message.chat_id,
+                          message_id=query.message.message_id)
     
 
 def main():
@@ -192,7 +192,7 @@ def main():
     updater = Updater(TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
-    # updater.dispatcher.add_handler(CallbackQueryHandler(button)) #hier ist der queryhandler!!!
+    updater.dispatcher.add_handler(CallbackQueryHandler(button)) #hier ist der queryhandler!!!
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
