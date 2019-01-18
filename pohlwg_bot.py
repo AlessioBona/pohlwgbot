@@ -173,7 +173,7 @@ def makeButtons(bot, update, args):
                 InlineKeyboardButton(args[1], callback_data='2')],
                 [InlineKeyboardButton(args[2], callback_data='3')]]
 
-    reply_markup = InlineKeyboardButton(keyboard)
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
     update.message.reply_text('Choose a button:', reply_markup=reply_markup)
 
