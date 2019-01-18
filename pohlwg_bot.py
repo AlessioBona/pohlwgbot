@@ -191,6 +191,7 @@ def main():
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button)) #hier ist der queryhandler!!!
+    # ES KANN NUR EINEN HANDLER GEBEN!!! :(
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
