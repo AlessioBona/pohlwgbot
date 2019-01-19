@@ -101,7 +101,7 @@ from Alessio import startAle, buttAle
 #for the database
 import os
 import psycopg2
-
+import copy
 
 TOKEN = "435982196:AAGg10t81vJUUygSTVJQ-xYR94bcQEOqv0E"
 
@@ -138,10 +138,12 @@ def addUserToDatabase(bot, update):
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         cursor = conn.cursor()
         usrId = update.message.from_user.id
-        usrName = update.message.from_user.name
-        #update.message.reply_text("your Id: " + str(usrId))
-        #update.message.reply_text("your Name: " + str(usrName))
-        cursor.execute("""INSERT INTO users (userid,username) VALUES ({},{});""".format(usrId, usrName))
+        update.message.reply_text("Please enter your user Name")
+        usrName = update.message.text
+        #usrName = update.message.from_user.name.replace(" ","_")
+        update.message.reply_text("your Id: " + str(usrId))
+        update.message.reply_text("your Name: " + str(usrName))
+        #cursor.execute("""INSERT INTO users (userid,username) VALUES ({},{});""".format(usrId, usrName))
         cursor.close()
     except Exception as e:
         print("Uh oh, can't connect. Invalid dbname, user or password?")
