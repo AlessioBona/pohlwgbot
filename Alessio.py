@@ -102,6 +102,7 @@ my_list = ["latte", "pane", "cioccolato", "vino"]
 all_users = [148608190, 80943481]
 all_lists = [None]*len(all_users)
 
+
 def startAle(bot, update):
     keyboard = []
     index = all_users.index(update.message.from_user.id)
@@ -118,7 +119,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    index = all_users.index(update.message.from_user.id)
+    index = all_users.index(query.message.from_user.id)
     all_lists[index].remove(query.data.replace("beta_",""))
     for x in range(0, len(all_lists[index])):
         c_data = 'beta_' + all_lists[index][x]
