@@ -136,10 +136,10 @@ def try_database(bot, update):
 
 
 def start(bot, update):
-    keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha'),
-                 InlineKeyboardButton("Option 2", callback_data='alpha')],
+    keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha_Option1'),
+                 InlineKeyboardButton("Option 2", callback_data='alpha_Option2')],
 
-                [InlineKeyboardButton("Option 3", callback_data='alpha')]]
+                [InlineKeyboardButton("Option 3", callback_data='alpha_Option3')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -194,7 +194,7 @@ def main():
     updater = Updater(TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button, pattern='alpha')) #hier ist der queryhandler!!!
+    updater.dispatcher.add_handler(CallbackQueryHandler(button, pattern='alpha.*')) #hier ist der queryhandler!!!
     # ES KANN NUR EINEN HANDLER GEBEN!!! :(
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
