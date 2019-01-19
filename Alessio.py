@@ -102,7 +102,7 @@ my_list = ["latte", "pane", "cioccolato", "vino"]
 def startAle(bot, update):
     keyboard = []
     for x in range(0, len(my_list)):
-        c_data = 'alpha_' + my_list[x]
+        c_data = 'beta_' + my_list[x]
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -118,7 +118,7 @@ def buttAle(bot, update):
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    
+
     text = ("Selected option: {}".format(query.data.replace("beta_",""), reply_markup=reply_markup))
 
     bot.edit_message_text(text=text,
