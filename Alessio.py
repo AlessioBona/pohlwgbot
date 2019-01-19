@@ -99,14 +99,16 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 import copy;
 
 my_list = ["latte", "pane", "cioccolato", "vino"]
+all_users = [148608190, 80943481]
 all_lists = []
 
 def startAle(bot, update):
     keyboard = []
-    all_lists[update.message.from_user.id] = copy.deepcopy(my_list)
-    for x in range(0, len(all_lists[update.message.from_user.id])):
-        c_data = 'beta_' + all_lists[update.message.from_user.id][x]
-        keyboard.append([InlineKeyboardButton(all_lists[update.message.from_user.id][x], callback_data=c_data)])
+    index = all_users.index(update.message.from_user.id)
+    all_lists[index] = copy.deepcopy(my_list)
+    for x in range(0, len(all_lists[index])):
+        c_data = 'beta_' + all_lists[index][x]
+        keyboard.append([InlineKeyboardButton(all_lists[index][x], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -116,10 +118,11 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    all_lists[update.message.from_user.id].remove(query.data.replace("beta_",""))
-    for x in range(0, len(all_lists[update.message.from_user.id])):
-        c_data = 'beta_' + all_lists[update.message.from_user.id][x]
-        keyboard.append([InlineKeyboardButton(all_lists[update.message.from_user.id][x], callback_data=c_data)])
+    index = all_users.index(update.message.from_user.id)
+    all_lists[index].remove(query.data.replace("beta_",""))
+    for x in range(0, len(all_lists[index])):
+        c_data = 'beta_' + all_lists[index][x]
+        keyboard.append([InlineKeyboardButton(all_lists[index][x], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
