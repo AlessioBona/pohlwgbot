@@ -133,7 +133,19 @@ def try_database(bot, update):
 
 #PSQL language
 #
-
+def showDatabase(bot, update):
+    try:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require') #(DATABASE_URL, sslmode='require') 
+        # create a psycopg2 cursor that can execute queries
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM prova"""")
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        print(rows)
+    except Exception as e:
+        print("Uh oh, can't connect. Invalid dbname, user or password?")
+        print(e)
 
 def start(bot, update):
     keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha_Option1'),
@@ -188,6 +200,7 @@ def button2(bot, update):
 def myId_callback(bot, update):
     fck_Id = update.message.from_user.id
     update.message.reply_text("your Id: " + str(fck_Id))
+
 
 def main():
     # Create the Updater and pass it your bot's token.
