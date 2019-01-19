@@ -99,13 +99,17 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 import copy;
 
 my_list = ["latte", "pane", "cioccolato", "vino"]
-all_users = [148608190, 80943481]
-all_lists = [None]*len(all_users)
+all_chats = []
+all_lists = []
 
 
 def startAle(bot, update):
     keyboard = []
-    index = all_users.index(update.message.from_user.id)
+    chatExists = update.message.chat.id in all_chats
+    if(not chatExists):
+        all_chats.append(update.message.chat.id)
+        all_lists.append([])
+    index = all_chats.index(update.message.chat.id)
     all_lists[index] = copy.deepcopy(my_list)
     for x in range(0, len(all_lists[index])):
         c_data = 'beta_' + all_lists[index][x]
@@ -119,7 +123,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    index = all_users.index(query.message.from_user.id)
+    index = all_chats.index(query.message.chat_id)
     all_lists[index].remove(query.data.replace("beta_",""))
     for x in range(0, len(all_lists[index])):
         c_data = 'beta_' + all_lists[index][x]
