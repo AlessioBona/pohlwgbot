@@ -134,20 +134,20 @@ def try_database(bot, update):
         print(e)
 
 def addUserToDatabase(bot, update):
-    try:
-        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-        cursor = conn.cursor()
-        usrId = update.message.from_user.id
+    #try:
+        #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        #cursor = conn.cursor()
+        #usrId = update.message.from_user.id
         update.message.reply_text("Please enter your user Name")
         usrName = update.message.text
         #usrName = update.message.from_user.name.replace(" ","_")
-        update.message.reply_text("your Id: " + str(usrId))
+        #update.message.reply_text("your Id: " + str(usrId))
         update.message.reply_text("your Name: " + str(usrName))
         #cursor.execute("""INSERT INTO users (userid,username) VALUES ({},{});""".format(usrId, usrName))
-        cursor.close()
-    except Exception as e:
-        print("Uh oh, can't connect. Invalid dbname, user or password?")
-        print(e)
+        #cursor.close()
+    #except Exception as e:
+        #print("Uh oh, can't connect. Invalid dbname, user or password?")
+        #print(e)
 
 #PSQL language
 #
