@@ -138,7 +138,7 @@ def showDatabase(bot, update):
         conn = psycopg2.connect(DATABASE_URL, sslmode='require') #(DATABASE_URL, sslmode='require') 
         # create a psycopg2 cursor that can execute queries
         cursor = conn.cursor()
-        cursor.execute("""SELECT * FROM prova"""")
+        cursor.execute("""SELECT * FROM prova""")
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
