@@ -97,11 +97,13 @@ from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup,
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 
-def startAle(bot, update):
-    keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha_Option1'),
-                 InlineKeyboardButton("Option 2", callback_data='alpha_Option2')],
+my_list = ["latte", "pane", "cioccolato", "vino"]
 
-                [InlineKeyboardButton("Option 3", callback_data='alpha_Option3')]]
+def startAle(bot, update):
+    keyboard = []
+    for x in range(0, len(my_list)):
+        c_data = 'alpha_' + my_list[0]
+        keyboard.append([InlineKeyboardButton(my_list[0], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
