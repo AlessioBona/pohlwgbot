@@ -123,8 +123,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    index = 0;
-        #all_chats.index(update.message.chat.id)
+    index = all_chats.index(update.message.chat_id)
     all_lists[index].remove(query.data.replace("beta_",""))
     for x in range(0, len(all_lists[index])):
         c_data = 'beta_' + all_lists[index][x]
@@ -132,8 +131,7 @@ def buttAle(bot, update):
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    text = update.callback_query
-    # text = "Selected optiona: {}".format(query.data.replace("beta_",""))
+    text = "Selected optiona: {}".format(query.data.replace("beta_",""))
 
     bot.edit_message_text(text=text, reply_markup=reply_markup,
                           chat_id=query.message.chat_id,
