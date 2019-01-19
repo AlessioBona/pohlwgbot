@@ -100,7 +100,7 @@ import copy;
 
 my_list = ["latte", "pane", "cioccolato", "vino"]
 all_users = [148608190, 80943481]
-all_lists = []
+all_lists = [None]*len(all_users)
 
 def startAle(bot, update):
     keyboard = []
