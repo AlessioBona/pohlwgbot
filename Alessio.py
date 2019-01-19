@@ -113,6 +113,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
+    my_list.remove(query.data.replace("beta_",""))
     for x in range(0, len(my_list)):
         c_data = 'beta_' + my_list[x]
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
