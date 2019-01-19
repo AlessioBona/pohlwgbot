@@ -136,10 +136,10 @@ def try_database(bot, update):
 
 
 def start(bot, update):
-    keyboard = [[InlineKeyboardButton("Option 1", callback_data='1'),
-                 InlineKeyboardButton("Option 2", callback_data='2')],
+    keyboard = [[InlineKeyboardButton("Option 1", callback_data='1', pattern=1),
+                 InlineKeyboardButton("Option 2", callback_data='2', pattern=1)],
 
-                [InlineKeyboardButton("Option 3", callback_data='3')]]
+                [InlineKeyboardButton("Option 3", callback_data='3', pattern=1)]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -169,9 +169,9 @@ def repeat(bot, update, args):
 
 
 def makeButtons(bot, update, args):
-    keyboard = [[InlineKeyboardButton(args[0], callback_data=args[0]),
-                InlineKeyboardButton(args[1], callback_data=args[1])],
-                [InlineKeyboardButton(args[2], callback_data=args[2])]]
+    keyboard = [[InlineKeyboardButton(args[0], callback_data=args[0], pattern=2),
+                InlineKeyboardButton(args[1], callback_data=args[1], pattern=2)],
+                [InlineKeyboardButton(args[2], callback_data=args[2], pattern=2)]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -194,12 +194,12 @@ def main():
     updater = Updater(TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button)) #hier ist der queryhandler!!!
+    updater.dispatcher.add_handler(CallbackQueryHandler(button, pattern=1)) #hier ist der queryhandler!!!
     # ES KANN NUR EINEN HANDLER GEBEN!!! :(
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button2))
+    updater.dispatcher.add_handler(CallbackQueryHandler(button2, pattern=2))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
     updater.dispatcher.add_error_handler(error)
