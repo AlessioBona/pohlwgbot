@@ -114,14 +114,14 @@ def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
     for x in range(0, len(my_list)):
-        c_data = 'alpha_' + my_list[x]
+        c_data = 'beta_' + my_list[x]
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    text = ("Selected option: {}".format(query.data.replace("beta_",""), reply_markup=reply_markup))
+    text = "Selected optiona: {}".format(query.data.replace("beta_",""))
 
-    bot.edit_message_text(text=text,
+    bot.edit_message_text(text=text, reply_markup=reply_markup,
                           chat_id=query.message.chat_id,
                           message_id=query.message.message_id)
 
