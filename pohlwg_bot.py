@@ -186,8 +186,8 @@ def button2(bot, update):
 
 
 def myId_callback(bot, update):
-    message = update.message.from_user.id
-    update.message.reply_text("your Id: " + message)
+    fck_Id = update.message.from_user.id
+    update.message.reply_text("your Id: " + str(fck_Id))
 
 def main():
     # Create the Updater and pass it your bot's token.
