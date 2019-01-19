@@ -123,7 +123,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    index = all_chats.index(update.message.chat_id)
+    index = all_chats.index(query.message.chat_id)
     all_lists[index].remove(query.data.replace("beta_",""))
     for x in range(0, len(all_lists[index])):
         c_data = 'beta_' + all_lists[index][x]
