@@ -186,7 +186,7 @@ def button2(bot, update):
 
 
 def myId_callback(bot, update):
-    message = update["from_id"]
+    message = update["chat"]["id"]
     update.message.reply_text("your Id: " + message)
 
 def main():
