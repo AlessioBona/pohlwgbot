@@ -183,7 +183,11 @@ def button2(bot, update):
     bot.send_message(text="Selected - option: {}".format(query.data),
                           chat_id=query.message.chat_id,
                           message_id=query.message.message_id)
-    
+
+
+def myId_callback(bot, update):
+    message = update["message"]["user"]["id"]
+    update.message.reply_text("you said: " + message)
 
 def main():
     # Create the Updater and pass it your bot's token.
@@ -197,6 +201,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
     updater.dispatcher.add_handler(CallbackQueryHandler(button2))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
+    updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
     updater.dispatcher.add_error_handler(error)
 
     # Start the Bot
