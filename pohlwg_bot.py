@@ -139,9 +139,10 @@ def addUserToDatabase(bot, update):
         cursor = conn.cursor()
         usrId = update.message.from_user.id
         usrName = update.message.from_user.name
-        update.message.reply_text("your Id: " + str(usrId))
-        update.message.reply_text("your Name: " + str(usrName))
-        cursor.close
+        #update.message.reply_text("your Id: " + str(usrId))
+        #update.message.reply_text("your Name: " + str(usrName))
+        cursor.execute("""INSERT INTO users (userid,username) VALUES ({},{});""".format(usrId, usrName))
+        cursor.close()
     except Exception as e:
         print("Uh oh, can't connect. Invalid dbname, user or password?")
         print(e)
