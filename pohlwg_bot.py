@@ -136,10 +136,10 @@ def try_database(bot, update):
 
 
 def start(bot, update):
-    keyboard = [[InlineKeyboardButton("Option 1", callback_data='1', pattern='alpha'),
-                 InlineKeyboardButton("Option 2", callback_data='2', pattern='alpha')],
+    keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha'),
+                 InlineKeyboardButton("Option 2", callback_data='alpha')],
 
-                [InlineKeyboardButton("Option 3", callback_data='3', pattern='alpha')]]
+                [InlineKeyboardButton("Option 3", callback_data='alpha')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -169,9 +169,9 @@ def repeat(bot, update, args):
 
 
 def makeButtons(bot, update, args):
-    keyboard = [[InlineKeyboardButton(args[0], callback_data=args[0], pattern='beta'),
-                InlineKeyboardButton(args[1], callback_data=args[1], pattern='beta')],
-                [InlineKeyboardButton(args[2], callback_data=args[2], pattern='beta')]]
+    keyboard = [[InlineKeyboardButton(args[0], callback_data='beta'),
+                InlineKeyboardButton(args[1], callback_data='beta')],
+                [InlineKeyboardButton(args[2], callback_data='beta')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
