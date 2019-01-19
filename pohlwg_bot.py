@@ -133,6 +133,19 @@ def try_database(bot, update):
         print("Uh oh, can't connect. Invalid dbname, user or password?")
         print(e)
 
+def addUserToDatabase(bot, update):
+    try:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = conn.cursor()
+        usrId = update.message.from_user.id
+        usrName = update.message.from_user.name
+        update.message.reply_text("your Id: " + str(usrId))
+        update.message.reply_text("your Name: " + str(usrName))
+        cursor.close
+    except Exception as e:
+        print("Uh oh, can't connect. Invalid dbname, user or password?")
+        print(e)
+
 #PSQL language
 #
 def showDatabase(bot, update):
@@ -213,6 +226,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('startAle', startAle))
     updater.dispatcher.add_handler(CallbackQueryHandler(buttAle, pattern='beta.*'))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
+    updater.dispatcher.add_handler(CommandHandler("addUser", addUserToDatabase))
     updater.dispatcher.add_error_handler(error)
     
     updater.dispatcher.add_handler(CommandHandler("showDB", showDatabase))
