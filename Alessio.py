@@ -96,11 +96,14 @@ import logging
 from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
+import copy;
 
 my_list = ["latte", "pane", "cioccolato", "vino"]
+all_lists = []
 
 def startAle(bot, update):
     keyboard = []
+    all_lists[update.message.from_user.id] = copy.deepcopy(my_list)
     for x in range(0, len(my_list)):
         c_data = 'beta_' + my_list[x]
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
@@ -113,7 +116,7 @@ def startAle(bot, update):
 def buttAle(bot, update):
     query = update.callback_query
     keyboard = []
-    my_list.remove(query.data.replace("beta_",""))
+    my_list[update.message.from_user.id].remove(query.data.replace("beta_",""))
     for x in range(0, len(my_list)):
         c_data = 'beta_' + my_list[x]
         keyboard.append([InlineKeyboardButton(my_list[x], callback_data=c_data)])
