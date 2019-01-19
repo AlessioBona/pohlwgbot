@@ -216,6 +216,8 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
     updater.dispatcher.add_error_handler(error)
+    
+    updater.dispatches.add_handler(CommandHandler,"showDB", showDatabase)
 
     # Start the Bot
     updater.start_polling()
