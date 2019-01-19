@@ -96,6 +96,8 @@ import logging
 from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
+from Alessio import startAle, buttAle
+
 #for the database
 import os
 import psycopg2
@@ -208,6 +210,8 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
+    updater.dispatcher.add_handler(CommandHandler('startAle', startAle()))
+    updater.dispatcher.add_handler(CallbackQueryHandler(buttAle, pattern='beta.*'))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
     updater.dispatcher.add_error_handler(error)
     

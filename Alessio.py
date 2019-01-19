@@ -97,7 +97,7 @@ from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup,
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 
-def start(bot, update):
+def startAle(bot, update):
     keyboard = [[InlineKeyboardButton("Option 1", callback_data='alpha_Option1'),
                  InlineKeyboardButton("Option 2", callback_data='alpha_Option2')],
 
@@ -108,10 +108,10 @@ def start(bot, update):
     update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
 
-def button(bot, update):
+def buttAle(bot, update):
     query = update.callback_query
 
-    bot.edit_message_text(text="Selected option: {}".format(query.data.replace("alpha_","")),
+    bot.edit_message_text(text="Selected option: {}".format(query.data.replace("beta_","")),
                           chat_id=query.message.chat_id,
                           message_id=query.message.message_id)
 
