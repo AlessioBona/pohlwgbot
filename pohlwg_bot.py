@@ -94,7 +94,7 @@
 """
 import logging
 from telegram import InlineKeyboardButton, KeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler
 
 from Alessio import startAle, buttAle
 
@@ -112,6 +112,7 @@ logger = logging.getLogger(__name__)
 # for the database (still necessary?)
 DATABASE_URL = os.environ['DATABASE_URL']
 
+NAME = range(1)
 
 #does the database work?
 def try_database(bot, update):
@@ -133,23 +134,27 @@ def try_database(bot, update):
         print("Uh oh, can't connect. Invalid dbname, user or password?")
         print(e)
 
-def addUserToDatabase(bot, update):
+def askUser(bot, update):
     #try:
         #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         #cursor = conn.cursor()
         #usrId = update.message.from_user.id
         update.message.reply_text("Please enter your user Name")
-        usrName = update.message.text
+        #usrName = update.message.text
         #usrName = update.message.from_user.name.replace(" ","_")
         #update.message.reply_text("your Id: " + str(usrId))
-        update.message.reply_text("your Name: " + str(usrName))
+        #update.message.reply_text("your Name is: " + str(usrName))
         #cursor.execute("""INSERT INTO users (userid,username) VALUES ({},{});""".format(usrId, usrName))
         #cursor.close()
     #except Exception as e:
         #print("Uh oh, can't connect. Invalid dbname, user or password?")
         #print(e)
-
+        return NAME
 #PSQL language
+
+def getName(bot,update):
+    usrName = update.message.from_user
+    update.message.reply_text("Your usrname is: " + str(usrName))
 #
 def showDatabase(bot, update):
     try:
@@ -229,7 +234,9 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('startAle', startAle))
     updater.dispatcher.add_handler(CallbackQueryHandler(buttAle, pattern='beta.*'))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
-    updater.dispatcher.add_handler(CommandHandler("addUser", addUserToDatabase))
+    
+    updater.dispatcher.add_handler(ConversationHandler(entry_points=[CommandHandler("addUser", askUser)]), states = {NAME: [MessageHandler(Filters.text, getName)]})
+
     updater.dispatcher.add_error_handler(error)
     
     updater.dispatcher.add_handler(CommandHandler("showDB", showDatabase))
