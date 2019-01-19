@@ -142,7 +142,7 @@ def showDatabase(bot, update):
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
-        print(rows)
+        update.message.reply_text(rows)
     except Exception as e:
         print("Uh oh, can't connect. Invalid dbname, user or password?")
         print(e)
