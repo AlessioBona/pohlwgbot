@@ -181,20 +181,13 @@ def repeat(bot, update, args):
 
 
 def makeButtons(bot, update, args):
-    keyboard = [[InlineKeyboardButton(args[0], callback_data='beta'),
+    keyboard = [[InlineKeyboardButton(args[0], callback_data='beta')], [
                 InlineKeyboardButton(args[1], callback_data='beta')],
                 [InlineKeyboardButton(args[2], callback_data='beta')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     update.message.reply_text('Choose a button:', reply_markup=reply_markup)
-
-
-def button2(bot, update):
-    query = update.callback_query
-    bot.send_message(text="Selected - option: {}".format(query.data),
-                          chat_id=query.message.chat_id,
-                          message_id=query.message.message_id)
 
 
 def myId_callback(bot, update):
@@ -208,11 +201,9 @@ def main():
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button, pattern='alpha.*')) #hier ist der queryhandler!!!
-    # ES KANN NUR EINEN HANDLER GEBEN!!! :(
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('repeat', repeat, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('makeButtons', makeButtons, pass_args=True))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button2, pattern='beta'))
     updater.dispatcher.add_handler(CommandHandler('tryDB', try_database))
     updater.dispatcher.add_handler(CommandHandler('myId', myId_callback))
     updater.dispatcher.add_error_handler(error)
